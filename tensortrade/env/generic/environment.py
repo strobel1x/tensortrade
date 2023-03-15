@@ -152,6 +152,9 @@ class TradingEnv(gym.Env, TimeIndexed):
         obs : `np.array`
             The first observation of the environment.
         """
+
+        super().reset(seed=seed)
+        
         if self.random_start_pct > 0.00:
             size = len(self.observer.feed.process[-1].inputs[0].iterable)
             random_start = randint(0, int(size * self.random_start_pct))
