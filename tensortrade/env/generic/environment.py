@@ -19,6 +19,7 @@ from typing import Dict, Any, Tuple
 from random import randint
 
 import gymnasium as gym
+from gymnasium.envs.registration import register
 import numpy as np
 
 from tensortrade.core import TimeIndexed, Clock, Component
@@ -82,7 +83,7 @@ class TradingEnv(gym.Env, TimeIndexed):
         self.random_start_pct = random_start_pct
 
         # Register the environment in Gym and fetch spec
-        gym.envs.register(
+        register(
             id='TensorTrade-v0',
             entry_point='tensortrade.env.generic:TradingEnv',
             max_episode_steps=max_episode_steps,
@@ -154,7 +155,7 @@ class TradingEnv(gym.Env, TimeIndexed):
         """
 
         super().reset(seed=seed)
-        
+
         if self.random_start_pct > 0.00:
             size = len(self.observer.feed.process[-1].inputs[0].iterable)
             random_start = randint(0, int(size * self.random_start_pct))
