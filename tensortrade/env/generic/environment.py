@@ -144,7 +144,7 @@ class TradingEnv(gym.Env, TimeIndexed):
 
         return obs, reward, done, truncated, info
 
-    def reset(self, *, seed=None, options=None) -> 'np.array':
+    def reset(self, seed=None, options=None) -> 'np.array':
         """Resets the environment.
 
         Returns
