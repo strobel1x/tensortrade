@@ -12,7 +12,6 @@ from tensortrade.env.generic import TradingEnv
 from tensortrade.env.generic.components.renderer import AggregateRenderer
 from tensortrade.feed.core import DataFeed
 from tensortrade.oms.wallets import Portfolio
-from gymnasium.wrappers.compatibility import EnvCompatibility
 
 
 def create(portfolio: 'Portfolio',
@@ -93,4 +92,4 @@ def create(portfolio: 'Portfolio',
         min_periods=min_periods,
         random_start_pct=random_start_pct,
     )
-    return EnvCompatibility(env)
+    return env
