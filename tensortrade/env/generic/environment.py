@@ -85,7 +85,7 @@ class TradingEnv(gym.Env, TimeIndexed):
         # Register the environment in Gym and fetch spec
         register(
             id='TensorTrade-v0',
-            entry_point='tensortrade.env.generic:TradingEnv',
+            entry_point=self,
             max_episode_steps=max_episode_steps,
         )
         self.spec = gym.spec(env_id='TensorTrade-v0')
