@@ -137,13 +137,14 @@ class TradingEnv(gym.Env, TimeIndexed):
         obs = self.observer.observe(self)
         reward = self.reward_scheme.reward(self)
         done = self.stopper.stop(self)
+        truncated = False
         info = self.informer.info(self)
 
         self.clock.increment()
 
-        return obs, reward, done, info
+        return obs, reward, done, truncated, info
 
-    def reset(self) -> 'np.array':
+    def reset(self, *, seed=None, options=None) -> 'np.array':
         """Resets the environment.
 
         Returns
@@ -168,10 +169,11 @@ class TradingEnv(gym.Env, TimeIndexed):
                     c.reset()
 
         obs = self.observer.observe(self)
+        info = {}
 
         self.clock.increment()
 
-        return obs
+        return obs, info
 
     def render(self, **kwargs) -> None:
         """Renders the environment."""
